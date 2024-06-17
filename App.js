@@ -1,20 +1,107 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  Pressable,
+  Image,
+} from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import { LogInUi } from "./LogIn";
+import { RegisterUi } from "./Register";
+import { HomeUi } from "./Home";
+import { MainUi } from "./MainView";
+import{AddNoteUi} from "./AddNote";
+import{ViewNoteUi} from "./ViewNote";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+
+const Stack = createNativeStackNavigator();
+
+function app() {
+  const ui = (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Main"
+          component={MainUi}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+              fontSize:25,
+            },
+            headerStyle: { backgroundColor: "#427B70" },
+            headerTitleAlign: "center",
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen name="Register" component={RegisterUi} 
+        options={{
+          headerTitleStyle: {
+            color: "white",
+            fontSize:25,
+          },
+          headerStyle: { backgroundColor: "#427B70" },
+          headerTitleAlign: "center",
+          headerShadowVisible: false,
+        }}
+        />
+        <Stack.Screen name="LogIn" component={LogInUi} 
+        options={{
+          headerTitleStyle: {
+            color: "white",
+            fontSize:25,
+          },
+          headerStyle: { backgroundColor: "#427B70" },
+          headerTitleAlign: "center",
+          headerShadowVisible: false,
+        }}
+        />
+        <Stack.Screen name="My Note" component={HomeUi} 
+        options={{
+          headerTitleStyle: {
+            color: "white",
+            fontSize:25,
+          },
+          headerStyle: { backgroundColor: "#427B70" },
+          headerTitleAlign: "center",
+          headerShadowVisible: false,
+          headerBackVisible:false,
+
+          headerLeft: () => (
+            <Pressable onPress={()=>{
+              
+            }}
+            >
+              <Image source={require("./assets/Img/menu.png")} style={{width: 27, height: 27}}/>
+            </Pressable>
+          ),
+
+        }}
+        />
+        <Stack.Screen name="New Note" component={AddNoteUi} 
+        options={{
+          headerTitleStyle: {
+            color: "white",
+            fontSize:25,
+          },
+          headerStyle: { backgroundColor: "#427B70" },
+          headerTitleAlign: "center",
+          headerShadowVisible: false,
+        }}
+        />
+        <Stack.Screen name="View Note" component={ViewNoteUi} 
+        options={{
+          headerTitleStyle: {
+            color: "white",
+            fontSize:25,
+          },
+          headerStyle: { backgroundColor: "#427B70" },
+          headerTitleAlign: "center",
+          headerShadowVisible: false,
+        }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
+
+  return ui;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default app;
